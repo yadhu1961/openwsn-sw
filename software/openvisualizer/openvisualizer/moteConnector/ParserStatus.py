@@ -131,7 +131,7 @@ class ParserStatus(Parser.Parser):
                                     3,
                                     6,
                                     'ScheduleRow',
-                                    '<BHBBBBQQBBBBHH',
+                                    '<BHBBBBQQBBBHHHBHH',
                                     [
                                         'row',                       # B
                                         'slotOffset',                # H 
@@ -144,6 +144,9 @@ class ParserStatus(Parser.Parser):
                                         'numRx',                     # B
                                         'numTx',                     # B
                                         'numTxACK',                  # B
+                                        'numRxTotal',                # H
+                                        'numTxTotal',                # H
+                                        'numTxACKTotal',             # H
                                         'lastUsedAsn_4',             # B
                                         'lastUsedAsn_2_3',           # H
                                         'lastUsedAsn_0_1',           # H

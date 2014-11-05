@@ -177,6 +177,9 @@ class StateScheduleRow(StateElem):
         self.data[0]['numRx']               = notif.numRx
         self.data[0]['numTx']               = notif.numTx
         self.data[0]['numTxACK']            = notif.numTxACK
+        self.data[0]['numRxTotal']          = notif.numRxTotal
+        self.data[0]['numTxTotal']          = notif.numTxTotal
+        self.data[0]['numTxACKTotal']       = notif.numTxACKTotal
         if 'lastUsedAsn' not in self.data[0]:
             self.data[0]['lastUsedAsn']     = typeAsn.typeAsn()
         self.data[0]['lastUsedAsn'].update(notif.lastUsedAsn_0_1,
