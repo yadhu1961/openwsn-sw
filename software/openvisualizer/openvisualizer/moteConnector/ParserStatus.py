@@ -38,6 +38,10 @@ class ParserStatus(Parser.Parser):
         
         # local variables
         self.fieldsParsingKeys    = []
+
+        # output file
+        self.outputNeighbor = open('neighborRaw.dat','w')
+        self.outputSchedule = open('scheudleRaw.dat','w')
         
         # register fields
         self._addFieldsParser   (
@@ -241,9 +245,16 @@ class ParserStatus(Parser.Parser):
         # log
         if log.isEnabledFor(logging.DEBUG):
             log.debug("moteId={0} statusElem={1}".format(moteId,statusElem))
-        
+
+
         # jump the header bytes
         input = input[3:]
+
+        if statusElem == 6:
+            self.outputSchedule.write("moteId={0} {1} \n".format(moteId >> 8,input))
+
+        if statusElem == 9:
+            self.outputNeighbor.write("moteId={0} {1} \n".format(moteId >> 8,input))
         
         # call the next header parser
         for key in self.fieldsParsingKeys:
@@ -273,7 +284,7 @@ class ParserStatus(Parser.Parser):
                 # log
                 if log.isEnabledFor(logging.DEBUG):
                     log.debug("parsed into {0}".format(returnTuple))
-                
+
                 # map to name tuple
                 return ('status',returnTuple)
         
