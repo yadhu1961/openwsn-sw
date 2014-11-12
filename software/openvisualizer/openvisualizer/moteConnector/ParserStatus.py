@@ -40,8 +40,9 @@ class ParserStatus(Parser.Parser):
         self.fieldsParsingKeys    = []
 
         # output file
-        self.outputNeighbor = open('neighborRaw.dat','w')
-        self.outputSchedule = open('scheudleRaw.dat','w')
+        # self.outputNeighbor = open('neighborRaw.dat','w')
+        # self.outputSchedule = open('scheudleRaw.dat','w')
+        # self.outputOTF = open('otf_queue.txt','w')
         
         # register fields
         self._addFieldsParser   (
@@ -225,6 +226,16 @@ class ParserStatus(Parser.Parser):
                                         'kaPeriod',                  # H
                                     ],
                                 )
+        # self._addFieldsParser   (   
+                                    # 3,
+                                    # 11,
+                                    # 'QueueOTF',
+                                    # '<HB',
+                                    # [
+                                        # 'addrId',                  # H
+                                        # 'packetInQueue',           # B
+                                    # ],
+                                # )
     
     #======================== public ==========================================
     
@@ -253,11 +264,15 @@ class ParserStatus(Parser.Parser):
         # jump the header bytes
         input = input[3:]
 
-        if statusElem == 6:
-            self.outputSchedule.write("moteId={0} {1} \n".format(moteId >> 8,input))
+        # if statusElem == 6:
+            # self.outputSchedule.write("moteId={0} {1} \n".format(moteId >> 8,input))
 
-        if statusElem == 9:
-            self.outputNeighbor.write("moteId={0} {1} \n".format(moteId >> 8,input))
+        # if statusElem == 9:
+            # self.outputNeighbor.write("moteId={0} {1} \n".format(moteId >> 8,input))
+            
+        # if statusElem == 11:
+            # self.outputOTF.write("moteId={0} {1} \n".format(moteId >> 8,input))
+            # print "moteId={0} {1} \n".format(moteId >> 8,input)
         
         # call the next header parser
         for key in self.fieldsParsingKeys:
