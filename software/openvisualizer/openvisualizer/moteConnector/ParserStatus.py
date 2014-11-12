@@ -226,16 +226,15 @@ class ParserStatus(Parser.Parser):
                                         'kaPeriod',                  # H
                                     ],
                                 )
-        # self._addFieldsParser   (   
-                                    # 3,
-                                    # 11,
-                                    # 'QueueOTF',
-                                    # '<HB',
-                                    # [
-                                        # 'addrId',                  # H
-                                        # 'packetInQueue',           # B
-                                    # ],
-                                # )
+        self._addFieldsParser   (   
+                                    3,
+                                    11,
+                                    'packetInQueue',
+                                    '<B',
+                                    [
+                                        'packetInQueue',           # B
+                                    ],
+                                )
     
     #======================== public ==========================================
     

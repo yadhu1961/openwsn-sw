@@ -366,6 +366,14 @@ class StatekaPeriod(StateElem):
         if len(self.data)==0:
             self.data.append({})
         self.data[0]['kaPeriod']            = notif.kaPeriod
+        
+class StateQueueOTF(StateElem):
+    
+    def update(self,notif):
+        StateElem.update(self)
+        if len(self.data)==0:
+            self.data.append({})
+        self.data[0]['packetInQueue']         = notif.packetInQueue
 
 class StateTable(StateElem):
 
@@ -398,6 +406,7 @@ class moteState(eventBusClient.eventBusClient):
     ST_IDMANAGER        = 'IdManager'
     ST_MYDAGRANK        = 'MyDagRank'
     ST_KAPERIOD         = 'kaPeriod'
+    ST_QUEUEOTF         = 'packetInQueue'
     ST_ALL              = [
         ST_OUPUTBUFFER,
         ST_ASN,
@@ -410,6 +419,7 @@ class moteState(eventBusClient.eventBusClient):
         ST_IDMANAGER, 
         ST_MYDAGRANK,
         ST_KAPERIOD,
+        ST_QUEUEOTF,
     ]
     
     TRIGGER_DAGROOT     = 'DAGroot'
@@ -478,6 +488,7 @@ class moteState(eventBusClient.eventBusClient):
                                               )
         self.state[self.ST_MYDAGRANK]       = StateMyDagRank()
         self.state[self.ST_KAPERIOD]        = StatekaPeriod()
+        self.state[self.ST_QUEUEOTF]        = StateQueueOTF()
         
         self.notifHandlers = {
             self.parserStatus.named_tuple[self.ST_OUPUTBUFFER]:
@@ -502,6 +513,8 @@ class moteState(eventBusClient.eventBusClient):
                 self.state[self.ST_MYDAGRANK].update,
             self.parserStatus.named_tuple[self.ST_KAPERIOD]:
                 self.state[self.ST_KAPERIOD].update,
+            self.parserStatus.named_tuple[self.ST_QUEUEOTF]:
+                self.state[self.ST_QUEUEOTF].update,
         }
         
         # initialize parent class
