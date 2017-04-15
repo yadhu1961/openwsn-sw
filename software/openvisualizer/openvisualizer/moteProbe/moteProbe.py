@@ -261,10 +261,13 @@ class moteProbe(threading.Thread):
                                                 self.serial.write(outputToWrite)
                                     else:
                                         # dispatch
-                                        dispatcher.send(
-                                            sender        = self.name,
-                                            signal        = 'fromMoteProbe@'+self.portname,
-                                            data          = [ord(c) for c in self.inputBuf],
+                                        if self.inputBuf[0][0] == 'F':
+                                            print self.inputBuf[1:]
+                                        else:
+                                            dispatcher.send(
+                                                sender        = self.name,
+                                                signal        = 'fromMoteProbe@'+self.portname,
+                                                data          = [ord(c) for c in self.inputBuf],
                                         )
                             
                             self.lastRxByte = rxByte
