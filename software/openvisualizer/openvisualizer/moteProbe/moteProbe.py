@@ -262,7 +262,9 @@ class moteProbe(threading.Thread):
                                     else:
                                         # dispatch
                                         if self.inputBuf[0][0] == 'F':
-                                            print self.inputBuf[1:]
+                                            #Here I am printing the complete msg received from the mote in hex format
+                                            print ":".join("{:02x}".format(ord(c)) for c in self.inputBuf)
+                                            print "Mote ID: "+"".join(hex(ord(self.inputBuf[2][0]))[2])+"".join(hex(ord(self.inputBuf[1][0]))[2])+" "+self.inputBuf[3:]
                                         else:
                                             dispatcher.send(
                                                 sender        = self.name,
